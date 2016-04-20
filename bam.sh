@@ -71,7 +71,7 @@ elif [ "$1" == "help" ] || [ "$1" == "info" ]; then
   # echo "put       :->   create git repo under gitProvider/userName/repo"
   echo "install   :->   install in /usr/local/bin/"
   echo "uninstall :->   remove from /usr/local/bin/"
-  echo "build     :->   install in BAMPATH and make script executable from rmbash"
+  echo "build     :->   install in BAMPATH and make script executable from bam"
   echo "run       :->   run executable from BAMPATH/bin"
   echo ""
 
