@@ -1,4 +1,4 @@
-# rmbash
+# Bam : bash application manager
 Golang style commands for Bash Scripts
 
 If you are not familiar with Go : google is your best friend!
@@ -13,60 +13,58 @@ Create directories :
  mkdir -p anywhereYouLike/MyBashScriptDirectory/src/github.com/romainmenke/
 ```
 
-I chose : 
+I chose :
 ```
- mkdir -p $HOME/RMBash/src/github.com/romainmenke/
-```
- 
-Add to .bash_profile :
-```
- export RMBASHPATH=anywhereYouLike/MyBashScriptDirectory
- export Path="$Path:RMBASHPATH/bin"
+ mkdir -p $HOME/Bam/src/github.com/romainmenke/
 ```
 
-I chose : 
+Add to .bash_profile :
 ```
- export RMBASHPATH=$HOME/RMBash
- export Path="$Path:RMBASHPATH/bin"
+ export BAMPATH=anywhereYouLike/MyBashScriptDirectory
+```
+
+I chose :
+```
+ export BAMPATH=$HOME/Bam
 ```
 
 Run Commands :
 ```
 source .bash_profile
 
-git clone https://github.com/romainmenke/rmbash $RMBASHPATH/src/github.com/romainmenke/rmbash
+git clone https://github.com/romainmenke/rmbash $BAMPATH/src/github.com/romainmenke/bam
 
-chmod 700 $RMBASHPATH/src/github.com/romainmenke/rmbash/rmbash.sh
+chmod 700 $BAMPATH/src/github.com/romainmenke/bam/bam.sh
 
-$RMBASHPATH/src/github.com/romainmenke/rmbash/rmbash.sh install github.com/romainmenke/rmbash
+$BAMPATH/src/github.com/romainmenke/bam/bam.sh install github.com/romainmenke/bam
 
 ```
 
 You are good to go!
 
 
-# Commands (rmbash)
+# Commands (bam)
 ```
- info || help 
+ info || help
 
  create    :->   create empty bash script in src dir
- get       :->   clone git repo into RMBASHPATH/src/
+ get       :->   clone git repo into BAMPATH/src/
  install   :->   install in /usr/local/bin/
  uninstall :->   remove from /usr/local/bin/
- build     :->   install in RMBASHPATH and make script executable from rmbash
- run       :->   run executable from RMBASHPATH/bin
+ build     :->   install in BAMPATH and make script executable from bam
+ run       :->   run executable from BAMPATH/bin
 ```
 
 # Tools
 
 [rmswift](https://github.com/romainmenke/rmswift) : golang style get command for Swift
 ```
-rmbash get github.com/romainmenke/rmswift
+bam get github.com/romainmenke/rmswift
 ```
 
 [rmcloak](https://github.com/romainmenke/rmcloak) : easy hide/show hidden files on mac
 ```
-rmbash get github.com/romainmenke/rmcloak
+bam get github.com/romainmenke/rmcloak
 ```
 
 # Licence
@@ -75,6 +73,6 @@ Use it however you like
 
 # Notes
 
-I was contemplating a "put" command but decided not to as it would promote username and password login, which is not ideal and it would have made this tool not-simple. 
+I was contemplating a "put" command but decided not to as it would promote username and password login, which is not ideal and it would have made this tool not-simple.
 
 The "get" command is just sugar for "git clone". It is not perfect.
