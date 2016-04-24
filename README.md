@@ -32,7 +32,7 @@ Run Commands :
 ```
 source .bash_profile
 
-git clone https://github.com/romainmenke/rmbash $BAMPATH/src/github.com/romainmenke/bam
+git clone https://github.com/romainmenke/bam $BAMPATH/src/github.com/romainmenke/bam
 
 chmod 700 $BAMPATH/src/github.com/romainmenke/bam/bam.sh
 
