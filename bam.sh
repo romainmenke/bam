@@ -1,3 +1,5 @@
+#!/bin/bash
+
 # credits to the interwebs, use as you please
 # composed by R Menke
 
@@ -51,6 +53,7 @@ elif [ "$1" == "create" ]; then
 
   mkdir -p $BAMPATH/src/$2
   touch $BAMPATH/src/$2/$(basename $2).sh
+  echo "#!/bin/bash" >> $BAMPATH/src/$2/$(basename $2).sh
 
 # GET
 elif [ "$1" == "get" ]; then
