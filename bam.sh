@@ -4,24 +4,7 @@
 # composed by R Menke
 
 # BUILD
-if [ "$1" == "build" ]; then
-
-  mkdir -p $BAMPATH/bin
-
-  execName=$(basename $2)
-  execPath=$BAMPATH/src/$2/$execName.sh
-
-  if [ -f "$execPath" ]
-  then
-    cp $execPath $BAMPATH/bin
-    mv $BAMPATH/bin/$execName.sh $BAMPATH/bin/$execName
-    chmod 700 $BAMPATH/bin/$execName
-  else
-  	echo "$execPath not found."
-  fi
-
-# INSTALL
-elif [ "$1" == "install" ]; then
+if [ "$1" == "install" ]; then
 
   execName=$(basename $2)
   execPath=$BAMPATH/src/$2/$execName.sh
@@ -29,21 +12,8 @@ elif [ "$1" == "install" ]; then
   if [ -f "$execPath" ]
   then
     cp $execPath /usr/local/bin/
-    mv /usr/local/bin/$execName.sh /usr/local/bin/$execName
-    chmod 700 /usr/local/bin/$execName
-  else
-    echo "$execPath not found."
-  fi
-
-# UNINSTALL
-elif [ "$1" == "uninstall" ]; then
-
-  execName=$(basename $2)
-  execPath=$BAMPATH/src/$2/$execName.sh
-
-  if [ -f "$execPath" ]
-  then
-    rm -f /usr/local/bin/$execName
+    mv /usr/local/bin/$execName.sh $BAMPATH/bin/$execName
+    chmod 700 $BAMPATH/bin/$execName
   else
     echo "$execPath not found."
   fi
@@ -59,11 +29,14 @@ elif [ "$1" == "create" ]; then
 elif [ "$1" == "get" ]; then
 
   git clone https://$2 $BAMPATH/src/$2
+  bam install $2
 
 # RUN
 elif [ "$1" == "run" ]; then
 
-  $BAMPATH/bin/$2
+  execName=$(basename $2)
+  execPath=$BAMPATH/src/$2/$execName.sh
+  bash $execPath ${@:3}
 
 # INFO
 elif [ "$1" == "help" ] || [ "$1" == "info" ]; then
@@ -71,11 +44,8 @@ elif [ "$1" == "help" ] || [ "$1" == "info" ]; then
   echo ""
   echo "create    :->   create empty bash script in src dir"
   echo "get       :->   clone git repo into BAMPATH/src/"
-  # echo "put       :->   create git repo under gitProvider/userName/repo"
-  echo "install   :->   install in /usr/local/bin/"
-  echo "uninstall :->   remove from /usr/local/bin/"
-  echo "build     :->   install in BAMPATH and make script executable from bam"
-  echo "run       :->   run executable from BAMPATH/bin"
+  echo "install   :->   install in BAMPATH"
+  echo "run       :->   run executable from src"
   echo ""
 
 fi

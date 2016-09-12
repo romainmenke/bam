@@ -18,9 +18,11 @@ I chose :
  mkdir -p $HOME/Bam/src/github.com/romainmenke/
 ```
 
-Add to .bash_profile :
+Add to .bash_profile (or equivalent) :
 ```
  export BAMPATH=anywhereYouLike/MyBashScriptDirectory
+
+ export PATH=$PATH:$BAMPATH/bin
 ```
 
 I chose :
@@ -34,9 +36,7 @@ source .bash_profile
 
 git clone https://github.com/romainmenke/bam $BAMPATH/src/github.com/romainmenke/bam
 
-chmod 700 $BAMPATH/src/github.com/romainmenke/bam/bam.sh
-
-$BAMPATH/src/github.com/romainmenke/bam/bam.sh install github.com/romainmenke/bam
+bash $BAMPATH/src/github.com/romainmenke/bam/bam.sh install github.com/romainmenke/bam
 
 ```
 
@@ -48,11 +48,9 @@ You are good to go!
  info || help
 
  create    :->   create empty bash script in src dir
- get       :->   clone git repo into BAMPATH/src/
- install   :->   install in /usr/local/bin/
- uninstall :->   remove from /usr/local/bin/
- build     :->   install in BAMPATH and make script executable from bam
- run       :->   run executable from BAMPATH/bin
+ get       :->   clone git repo into BAMPATH/src/ and run bam install
+ install   :->   install in BAMPATH
+ run       :->   run executable from source
 ```
 
 # Tools
