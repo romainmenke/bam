@@ -11,8 +11,7 @@ if [ "$1" == "install" ]; then
 
   if [ -f "$execPath" ]
   then
-    cp $execPath /usr/local/bin/
-    mv /usr/local/bin/$execName.sh $BAMPATH/bin/$execName
+    cp $execPath $BAMPATH/bin/$execName
     chmod 700 $BAMPATH/bin/$execName
   else
     echo "$execPath not found."
