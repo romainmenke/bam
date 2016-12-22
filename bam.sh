@@ -3,7 +3,7 @@
 # credits to the interwebs, use as you please
 # composed by R Menke
 
-# BUILD
+# INSTALL
 if [ "$1" == "install" ]; then
 
   execName=$(basename $2)
