@@ -53,17 +53,6 @@ You are good to go!
  run       :->   run executable from source
 ```
 
-# Tools
-
-[rmswift](https://github.com/romainmenke/rmswift) : golang style get command for Swift
-```
-bam get github.com/romainmenke/rmswift
-```
-
-[rmcloak](https://github.com/romainmenke/rmcloak) : easy hide/show hidden files on mac
-```
-bam get github.com/romainmenke/rmcloak
-```
 
 # Licence
 
