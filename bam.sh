@@ -6,46 +6,88 @@
 # BUILD
 if [ "$1" == "install" ]; then
 
-  execName=$(basename $2)
-  execPath=$BAMPATH/src/$2/$execName.sh
+  execName=$(basename $2);
+  execPath=$BAMPATH/src/$2/$execName.sh;
 
-  if [ -f "$execPath" ]
-  then
-    cp $execPath /usr/local/bin/
-    mv /usr/local/bin/$execName.sh $BAMPATH/bin/$execName
-    chmod 700 $BAMPATH/bin/$execName
+  if [ -f "$execPath" ]; then
+    cp $execPath /usr/local/bin/;
+    mv /usr/local/bin/$execName.sh $BAMPATH/bin/$execName;
+    chmod 700 $BAMPATH/bin/$execName;
   else
-    echo "$execPath not found."
+    echo "$execPath not found.";
   fi
 
-# CREATE
+  # CREATE
 elif [ "$1" == "create" ]; then
 
-  mkdir -p $BAMPATH/src/$2
-  touch $BAMPATH/src/$2/$(basename $2).sh
-  echo "#!/bin/bash" >> $BAMPATH/src/$2/$(basename $2).sh
+  mkdir -p $BAMPATH/src/$2;
+  touch $BAMPATH/src/$2/$(basename $2).sh;
+  echo "#!/bin/bash" >> $BAMPATH/src/$2/$(basename $2).sh;
 
-# GET
+  # GET
 elif [ "$1" == "get" ]; then
 
-  git clone https://$2 $BAMPATH/src/$2
-  bam install $2
+  # flags
+  if [ "$2" == "-u" ] || [ "$3" == "-u" ]; then
+    update=true;
+  fi
 
-# RUN
+  if [ "$2" == "-d" ] || [ "$3" == "-d" ]; then
+    downloadOnly=true;
+  fi
+
+  if [ "$update" == true ]; then
+    shift;
+  fi
+
+  if [ "$downloadOnly" == true ]; then
+    shift;
+  fi
+  #flags
+
+  # clone if the dir doesnt exist
+  if [ ! -d "$BAMPATH/src/$2" ]; then
+    git clone https://$2 $BAMPATH/src/$2 ||
+    { exit 1; };
+
+    cd $BAMPATH/src/$2 &&
+    {
+      git checkout origin/master
+    } &> /dev/null;
+  fi
+
+  # fetch/pull if update flag is set
+  if [ "$update" == true ]; then
+    cd $BAMPATH/src/$2 &&
+    git fetch &&
+    git pull origin master ||
+    { exit 1; };
+
+    {
+      git checkout origin/master
+    } &> /dev/null;
+  fi
+
+  # only install when -d flag isn't set
+  if [ ! "$downloadOnly" == true  ]; then
+    bam install $2;
+  fi
+
+  # RUN
 elif [ "$1" == "run" ]; then
 
-  execName=$(basename $2)
-  execPath=$BAMPATH/src/$2/$execName.sh
-  bash $execPath ${@:3}
+  execName=$(basename $2);
+  execPath=$BAMPATH/src/$2/$execName.sh;
+  bash $execPath ${@:3};
 
-# INFO
-elif [ "$1" == "help" ] || [ "$1" == "info" ]; then
+  # INFO
+else
 
-  echo ""
-  echo "create    :->   create empty bash script in src dir"
-  echo "get       :->   clone git repo into BAMPATH/src/"
-  echo "install   :->   install in BAMPATH"
-  echo "run       :->   run executable from src"
+  echo "";
+  echo "create    :->   create empty bash script in src dir";
+  echo "get       :->   clone git repo into BAMPATH/src/";
+  echo "install   :->   install in BAMPATH";
+  echo "run       :->   run executable from src";
   echo ""
 
 fi
