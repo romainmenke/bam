@@ -3,16 +3,15 @@
 # credits to the interwebs, use as you please
 # composed by R Menke
 
-# BUILD
+# INSTALL
 if [ "$1" == "install" ]; then
 
   execName=$(basename $2);
   execPath=$BAMPATH/src/$2/$execName.sh;
 
   if [ -f "$execPath" ]; then
-    cp $execPath /usr/local/bin/;
-    mv /usr/local/bin/$execName.sh $BAMPATH/bin/$execName;
-    chmod 700 $BAMPATH/bin/$execName;
+    cp $execPath $BAMPATH/bin/$execName
+    chmod 700 $BAMPATH/bin/$execName
   else
     echo "$execPath not found.";
   fi
@@ -91,37 +90,3 @@ else
   echo ""
 
 fi
-
-
-
-
-# # PUT
-# elif [ "$1" == "put" ]; then
-#
-#   repo=$(basename $2)
-#   gitUser=$(basename $(dirName $2))
-#   gitProvider=$(dirName $(dirName $2))
-#   repoUrl="https://$gitUser@$gitProvider/$gitUser/$repo"
-#
-#   echo "Repo: $repo"
-#   echo "User: $gitUser"
-#   echo "Provider: $gitProvider"
-#
-#   tempPWD=$pwd
-#   cd $BAMPATH/src/$2
-#
-#   if ! git rev-parse --is-inside-work-tree > /dev/null 2>&1; then
-#     git init
-#   fi
-#
-#   # echo "password:"
-#   # read -s gitPassword
-#
-#   if git ls-remote "$repoUrl" &> /dev/null; then
-#     echo "There is already a repository named $repo for $gitProvider/$gitUser"
-#   else
-#     echo "NOT FOUND"
-#   fi
-#
-#
-#   cd $tempPWD
