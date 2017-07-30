@@ -53,13 +53,11 @@ You are good to go!
  run       :->   run executable from source
 ```
 
+### Sub Commands
+
+`$ bam get -d ...` don't install, only download
+`$ bam get -u ...` update from remote
 
 # Licence
 
 Use it however you like
-
-# Notes
-
-I was contemplating a "put" command but decided not to as it would promote username and password login, which is not ideal and it would have made this tool not-simple.
-
-The "get" command is just sugar for "git clone". It is not perfect.
