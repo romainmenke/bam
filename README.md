@@ -56,6 +56,7 @@ You are good to go!
 ### Sub Commands
 
 `$ bam get -d ...` don't install, only download
+
 `$ bam get -u ...` update from remote
 
 # Licence

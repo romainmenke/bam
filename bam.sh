@@ -10,8 +10,8 @@ if [ "$1" == "install" ]; then
   execPath=$BAMPATH/src/$2/$execName.sh;
 
   if [ -f "$execPath" ]; then
-    cp $execPath $BAMPATH/bin/$execName
-    chmod 700 $BAMPATH/bin/$execName
+    cp $execPath $BAMPATH/bin/$execName;
+    chmod 700 $BAMPATH/bin/$execName;
   else
     echo "$execPath not found.";
   fi
